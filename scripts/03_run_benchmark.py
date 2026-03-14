@@ -16,7 +16,7 @@ sys.path.insert(0, ".")
 from config import (
     AWS_REGION, AWS_PROFILE, GLUE_DATABASE,
     GLUE_TABLE_BASELINE, GLUE_TABLE_OPTIMIZED,
-    ATHENA_WORKGROUP, BENCHMARK_RUNS, QUERY_TIMEOUT_SEC,
+    ATHENA_WORKGROUP, ATHENA_OUTPUT_LOC, BENCHMARK_RUNS, QUERY_TIMEOUT_SEC,
     LOCAL_RESULTS_DIR, LOCAL_SQL_DIR
 )
 
@@ -54,6 +54,7 @@ def run_query(sql: str, timeout: int = QUERY_TIMEOUT_SEC) -> dict:
     resp = ath.start_query_execution(
         QueryString=sql,
         QueryExecutionContext={"Database": GLUE_DATABASE},
+        ResultConfiguration={"OutputLocation": ATHENA_OUTPUT_LOC},
         WorkGroup=ATHENA_WORKGROUP
     )
     exec_id = resp["QueryExecutionId"]

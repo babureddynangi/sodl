@@ -22,7 +22,7 @@ sys.path.insert(0, ".")
 from config import (
     AWS_REGION, AWS_PROFILE, GLUE_DATABASE,
     GLUE_TABLE_BASELINE, GLUE_TABLE_OPTIMIZED,
-    ATHENA_WORKGROUP, QUERY_TIMEOUT_SEC,
+    ATHENA_WORKGROUP, ATHENA_OUTPUT_LOC, QUERY_TIMEOUT_SEC,
     LOCAL_RESULTS_DIR
 )
 
@@ -37,6 +37,7 @@ def run_athena_query(sql: str, desc: str = "") -> str:
     resp = ath.start_query_execution(
         QueryString=sql,
         QueryExecutionContext={"Database": GLUE_DATABASE},
+        ResultConfiguration={"OutputLocation": ATHENA_OUTPUT_LOC},
         WorkGroup=ATHENA_WORKGROUP
     )
     exec_id = resp["QueryExecutionId"]
@@ -142,8 +143,8 @@ if __name__ == "__main__":
     print("(This calls 03_run_benchmark.py in 'optimized' mode)")
     import subprocess
     result = subprocess.run(
-        [sys.executable, "03_run_benchmark.py", "optimized"],
-        cwd=os.path.dirname(os.path.abspath(__file__)),
+        [sys.executable, "scripts/03_run_benchmark.py", "optimized"],
+        cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
         capture_output=False
     )
     if result.returncode != 0:

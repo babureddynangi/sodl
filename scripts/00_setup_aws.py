@@ -66,26 +66,8 @@ def create_glue_db():
 
 # ── 3. Athena workgroup ───────────────────────────────────────────────────────
 def create_athena_workgroup():
-    try:
-        ath.create_work_group(
-            Name=ATHENA_WORKGROUP,
-            Configuration={
-                "ResultConfiguration": {
-                    "OutputLocation": ATHENA_OUTPUT_LOC
-                },
-                "EnforceWorkGroupConfiguration": True,
-                "PublishCloudWatchMetricsEnabled": True,   # enables CloudWatch metrics
-                "BytesScannedCutoffPerQuery": 10 * 1024 ** 3,  # 10 GB safety limit
-            },
-            Description="SODL MVP workgroup — partition advisor benchmark"
-        )
-        print(f"[OK] Athena workgroup created: {ATHENA_WORKGROUP}")
-    except ClientError as e:
-        if e.response["Error"]["Code"] == "InvalidRequestException" \
-                and "already exists" in str(e):
-            print(f"[OK] Athena workgroup already exists: {ATHENA_WORKGROUP}")
-        else:
-            raise
+    # Using the built-in 'primary' workgroup — no creation needed
+    print(f"[OK] Athena workgroup: using '{ATHENA_WORKGROUP}' (built-in, no creation required)")
 
 
 # ── 4. Verify IAM permissions (soft check) ───────────────────────────────────

@@ -1,0 +1,76 @@
+tag,table,run,query_id,query_label,engine_ms,bytes_scanned,rows_returned,status,execution_id
+optimized,transactions_optimized,1,Q01,Total spend by merchant category (full scan test),667,4231551,0,SUCCEEDED,2dfda0cc-1d45-4599-b91c-192c45b30a80
+optimized,transactions_optimized,1,Q02,Fraud rate by region and category,779,105889,0,SUCCEEDED,eaf6e4a2-aa33-4019-bc47-19237af08d3d
+optimized,transactions_optimized,1,Q03,High-value transactions in travel category,900,7629179,0,SUCCEEDED,0a0d73ea-58b2-44bf-b1ed-a13e8906e2ff
+optimized,transactions_optimized,1,Q04,Monthly transaction volume (retail only),679,3099806,0,SUCCEEDED,a30595f8-5717-457d-b5f3-97b2454bcba3
+optimized,transactions_optimized,1,Q05,Average transaction size by card type and channel (dining),657,2469792,0,SUCCEEDED,b37b3320-64f1-4ba0-9ca7-b488a77c037e
+optimized,transactions_optimized,1,Q06,Fraud detection — suspicious high-amount online transactions,754,2500906,0,SUCCEEDED,b4c479e7-882d-4bfb-b119-0ae254090950
+optimized,transactions_optimized,1,Q07,Region comparison for utilities spend,1291,1358506,0,SUCCEEDED,3535e968-3d8e-4403-8be8-7ec9349b1a8a
+optimized,transactions_optimized,1,Q08,Customer segmentation by account age (healthcare),744,1566325,0,SUCCEEDED,1b8a6ea8-672f-4c22-b552-8914f75964cf
+optimized,transactions_optimized,1,Q09,Currency distribution for entertainment,678,1052761,0,SUCCEEDED,a954993e-7d87-45b7-bc9b-4288483cd80e
+optimized,transactions_optimized,1,Q10,Top merchants by transaction volume (groceries),646,1493517,0,SUCCEEDED,6b1a3bdd-50c8-4025-beb9-7ab6a500e22b
+optimized,transactions_optimized,1,Q11,Multi-category fraud pattern,719,191431,0,SUCCEEDED,b3c1eb1a-6c53-4929-a9ae-5b5c5a1fb0bf
+optimized,transactions_optimized,1,Q12,ATM transaction analysis,985,4837524,0,SUCCEEDED,30718db3-f824-4fda-98a5-f89c689140a3
+optimized,transactions_optimized,1,Q13,High-value customer analysis (travel + healthcare),1534,10049786,0,SUCCEEDED,9e80f22d-d9fa-4e84-bb12-e819fc5c855e
+optimized,transactions_optimized,1,Q14,Daily transaction trend for online category,733,840011,0,SUCCEEDED,0e804ddc-31db-4f0f-a2a9-077e317c53b8
+optimized,transactions_optimized,1,Q15,Prepaid card usage patterns,735,5398924,0,SUCCEEDED,7602e24d-58e3-4690-9948-f4f86f6507ce
+optimized,transactions_optimized,1,Q16,Cross-region spend comparison (entertainment),712,3743519,0,SUCCEEDED,e7f49121-da31-438b-88d4-8aa207f3c02a
+optimized,transactions_optimized,1,Q17,Fraud risk score by channel (financial category),846,45006,0,SUCCEEDED,5dd1bb7c-88ba-4818-9af1-c5f625dcb76f
+optimized,transactions_optimized,1,Q18,EUR transactions analysis,782,6599612,0,SUCCEEDED,eea66fdf-cd90-47b5-84c8-c7db8b663969
+optimized,transactions_optimized,1,Q19,New customer transaction patterns,659,5095812,0,SUCCEEDED,39120b9b-a075-47a8-9e40-a6330f895d47
+optimized,transactions_optimized,1,Q20,Large transaction fraud check (multi-category),1006,3713513,0,SUCCEEDED,85c9af5f-5b0f-44cd-8797-baba4c41912d
+optimized,transactions_optimized,1,Q21,Monthly fraud trend (dining),815,2842148,0,SUCCEEDED,098b76e5-294b-43af-b814-6af4cc26f1ca
+optimized,transactions_optimized,1,Q22,AP region high-value retail,1012,9149386,0,SUCCEEDED,57783211-7d3f-40d9-9e9a-974379cf0052
+optimized,transactions_optimized,1,Q23,Channel efficiency for groceries,,,,ERROR,
+optimized,transactions_optimized,1,Q24,Debit card category spend distribution,904,12862221,0,SUCCEEDED,aa0bdc4b-7116-49e0-96cf-7245b732a7d8
+optimized,transactions_optimized,1,Q25,"Combined fraud and spend summary (all categories, for baseline comparison)",1314,11803375,0,SUCCEEDED,ea8bcc83-d1bf-4474-b2f2-812acff6aada
+optimized,transactions_optimized,2,Q01,Total spend by merchant category (full scan test),742,4231551,0,SUCCEEDED,f00e8984-3982-4814-b959-f68697c221df
+optimized,transactions_optimized,2,Q02,Fraud rate by region and category,569,105889,0,SUCCEEDED,344adaa5-e5bc-445d-8fd9-d41f19f52794
+optimized,transactions_optimized,2,Q03,High-value transactions in travel category,733,7629179,0,SUCCEEDED,804f4db5-9768-4729-9c25-acd662c1dc1e
+optimized,transactions_optimized,2,Q04,Monthly transaction volume (retail only),626,3099806,0,SUCCEEDED,bc2b3cf0-17a2-40d0-b869-e3fab6804e08
+optimized,transactions_optimized,2,Q05,Average transaction size by card type and channel (dining),854,2469792,0,SUCCEEDED,d4173c15-f35d-46bb-a30e-73fd96aaff11
+optimized,transactions_optimized,2,Q06,Fraud detection — suspicious high-amount online transactions,1288,2500906,0,SUCCEEDED,dba8b940-ffa0-45af-8fea-c0a17d2c9add
+optimized,transactions_optimized,2,Q07,Region comparison for utilities spend,743,1358506,0,SUCCEEDED,2e366379-6679-4ae7-9cde-bf9fb83defd8
+optimized,transactions_optimized,2,Q08,Customer segmentation by account age (healthcare),601,1566325,0,SUCCEEDED,cd977527-9572-46b4-8249-b145acc4ba1d
+optimized,transactions_optimized,2,Q09,Currency distribution for entertainment,543,1052761,0,SUCCEEDED,81566dc3-8a76-41f4-b6af-bb8a686ba710
+optimized,transactions_optimized,2,Q10,Top merchants by transaction volume (groceries),657,1493517,0,SUCCEEDED,4cc11ca1-efcb-4f31-bc59-2611d8039509
+optimized,transactions_optimized,2,Q11,Multi-category fraud pattern,941,191431,0,SUCCEEDED,8e318c54-d6f2-428e-8242-ae10718f1937
+optimized,transactions_optimized,2,Q12,ATM transaction analysis,720,4837524,0,SUCCEEDED,a81a53ad-c48f-4912-ba68-f68b2c8b0b18
+optimized,transactions_optimized,2,Q13,High-value customer analysis (travel + healthcare),859,10049786,0,SUCCEEDED,b25ce44a-9941-4cb8-844e-22dfbe349c2b
+optimized,transactions_optimized,2,Q14,Daily transaction trend for online category,919,840011,0,SUCCEEDED,d127bd62-c495-4008-b7f5-6434b70c7723
+optimized,transactions_optimized,2,Q15,Prepaid card usage patterns,690,5398924,0,SUCCEEDED,328bf1c5-9d6e-4080-a244-207b65b729d8
+optimized,transactions_optimized,2,Q16,Cross-region spend comparison (entertainment),718,3743519,0,SUCCEEDED,d1015b38-50cc-4b08-9642-f7e3e0aa51bd
+optimized,transactions_optimized,2,Q17,Fraud risk score by channel (financial category),850,45006,0,SUCCEEDED,2477bfbe-be6f-467a-b36f-0f6a3252bbf8
+optimized,transactions_optimized,2,Q18,EUR transactions analysis,650,6599612,0,SUCCEEDED,6145f7a8-5b14-459d-9e2b-e52f7568c474
+optimized,transactions_optimized,2,Q19,New customer transaction patterns,1106,5095812,0,SUCCEEDED,bf8b3298-ec11-4dd6-baed-8c01bd99728c
+optimized,transactions_optimized,2,Q20,Large transaction fraud check (multi-category),1107,3713513,0,SUCCEEDED,bf33c79f-1bee-4eb7-b4f9-8edc73bab54c
+optimized,transactions_optimized,2,Q21,Monthly fraud trend (dining),880,2842148,0,SUCCEEDED,cfc926f9-2ac4-4807-a2aa-ff41d71290ab
+optimized,transactions_optimized,2,Q22,AP region high-value retail,871,9149386,0,SUCCEEDED,6b3103a8-5d60-401f-8db5-2941a16dc158
+optimized,transactions_optimized,2,Q23,Channel efficiency for groceries,,,,ERROR,
+optimized,transactions_optimized,2,Q24,Debit card category spend distribution,984,12862221,0,SUCCEEDED,62b34f98-62f2-410e-a2ea-2c7cd447be90
+optimized,transactions_optimized,2,Q25,"Combined fraud and spend summary (all categories, for baseline comparison)",952,11803375,0,SUCCEEDED,77533507-cc93-4981-b63a-578a0131935b
+optimized,transactions_optimized,3,Q01,Total spend by merchant category (full scan test),544,4231551,0,SUCCEEDED,258c633f-7fe5-4131-acba-30eded5c7fc5
+optimized,transactions_optimized,3,Q02,Fraud rate by region and category,584,105889,0,SUCCEEDED,b751396f-9e20-4242-ac25-5e22c508305b
+optimized,transactions_optimized,3,Q03,High-value transactions in travel category,902,7629179,0,SUCCEEDED,9e07c8b7-d0f9-47ef-a3e9-75a0868d3182
+optimized,transactions_optimized,3,Q04,Monthly transaction volume (retail only),652,3099806,0,SUCCEEDED,bf0fbc54-aac2-4b53-9ca6-790d1333ab09
+optimized,transactions_optimized,3,Q05,Average transaction size by card type and channel (dining),572,2469792,0,SUCCEEDED,8d87ed75-0430-4f62-8467-07b9ddec5408
+optimized,transactions_optimized,3,Q06,Fraud detection — suspicious high-amount online transactions,962,2500906,0,SUCCEEDED,07c7405f-6ced-4ea2-bab2-00a4fbd2f1b6
+optimized,transactions_optimized,3,Q07,Region comparison for utilities spend,627,1358506,0,SUCCEEDED,a15d9fb8-e038-49df-b37d-a3e1054d8096
+optimized,transactions_optimized,3,Q08,Customer segmentation by account age (healthcare),777,1566325,0,SUCCEEDED,545c7f96-6bce-4350-93f1-17d17cfef3cc
+optimized,transactions_optimized,3,Q09,Currency distribution for entertainment,480,1052761,0,SUCCEEDED,de923769-b50c-49b0-ad9c-dc2dd55baeda
+optimized,transactions_optimized,3,Q10,Top merchants by transaction volume (groceries),612,1493517,0,SUCCEEDED,89b4ddad-bcb9-429a-9cd3-90c5cba74af7
+optimized,transactions_optimized,3,Q11,Multi-category fraud pattern,692,191431,0,SUCCEEDED,08a27085-bbfb-4be4-a338-b4aa499fbb82
+optimized,transactions_optimized,3,Q12,ATM transaction analysis,760,4837524,0,SUCCEEDED,88a54b08-e675-4906-814c-78af4ec70e2f
+optimized,transactions_optimized,3,Q13,High-value customer analysis (travel + healthcare),928,10049786,0,SUCCEEDED,3f5cda8c-0ab0-4c53-8d7a-202bbd2d2f2b
+optimized,transactions_optimized,3,Q14,Daily transaction trend for online category,653,840011,0,SUCCEEDED,2fb80edd-2b5b-4a4a-94b0-3af192582022
+optimized,transactions_optimized,3,Q15,Prepaid card usage patterns,1032,5398924,0,SUCCEEDED,dd849e9e-633c-4517-a547-43d826f804ae
+optimized,transactions_optimized,3,Q16,Cross-region spend comparison (entertainment),750,3743519,0,SUCCEEDED,c25852d4-b88a-42cc-89ef-4f13001b1bd0
+optimized,transactions_optimized,3,Q17,Fraud risk score by channel (financial category),453,45006,0,SUCCEEDED,aba3e2a5-6c1d-4309-a85c-06a717c2d95e
+optimized,transactions_optimized,3,Q18,EUR transactions analysis,719,6599612,0,SUCCEEDED,a0a05a9a-f4dc-4d9c-8d6a-bf9915432e62
+optimized,transactions_optimized,3,Q19,New customer transaction patterns,871,5095812,0,SUCCEEDED,ac82f8d3-2adf-4a65-bcd6-ada7ae35b8bb
+optimized,transactions_optimized,3,Q20,Large transaction fraud check (multi-category),793,3713513,0,SUCCEEDED,3dd67f31-c139-4b14-a2ff-2dfea94d8f0a
+optimized,transactions_optimized,3,Q21,Monthly fraud trend (dining),649,2842148,0,SUCCEEDED,79ae2b8a-9618-434b-a6c1-bdfe5f64f666
+optimized,transactions_optimized,3,Q22,AP region high-value retail,853,9149386,0,SUCCEEDED,d4f64995-7681-4e26-8bab-20b8b2c83f77
+optimized,transactions_optimized,3,Q23,Channel efficiency for groceries,,,,ERROR,
+optimized,transactions_optimized,3,Q24,Debit card category spend distribution,734,12862221,0,SUCCEEDED,b275901b-1567-4771-a385-339a294d88ab
+optimized,transactions_optimized,3,Q25,"Combined fraud and spend summary (all categories, for baseline comparison)",982,11803375,0,SUCCEEDED,a4592f56-4b8a-4723-9ccc-3356d3503c59

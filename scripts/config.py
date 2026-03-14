@@ -21,7 +21,7 @@ GLUE_TABLE_BASELINE  = "transactions_baseline"
 GLUE_TABLE_OPTIMIZED = "transactions_optimized"
 
 # ── Athena ────────────────────────────────────────────────────────────────────
-ATHENA_WORKGROUP    = "sodl-mvp"
+ATHENA_WORKGROUP    = "primary"
 ATHENA_OUTPUT_LOC   = f"s3://{S3_BUCKET}/{S3_PREFIX_ATHENA}"
 
 # ── Data Generation ───────────────────────────────────────────────────────────

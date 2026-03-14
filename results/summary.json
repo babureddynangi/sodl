@@ -1,0 +1,223 @@
+{
+  "n_queries": 21,
+  "mean_latency_baseline": 1421,
+  "mean_latency_optimized": 812,
+  "mean_latency_reduction_pct": 42.9,
+  "mean_bytes_baseline_mb": 29.1,
+  "mean_bytes_optimized_mb": 4.4,
+  "mean_bytes_reduction_pct": 85.0,
+  "p95_latency_baseline": 1775,
+  "p95_latency_optimized": 1083,
+  "per_query": [
+    {
+      "query_id": "Q01",
+      "query_label": "Total spend by merchant category (full scan test)",
+      "baseline_latency_ms": 1066,
+      "optimized_latency_ms": 651,
+      "latency_delta_pct": 38.9,
+      "baseline_bytes_mb": 18.0,
+      "optimized_bytes_mb": 4.0,
+      "bytes_delta_pct": 77.6
+    },
+    {
+      "query_id": "Q02",
+      "query_label": "Fraud rate by region and category",
+      "baseline_latency_ms": 894,
+      "optimized_latency_ms": 644,
+      "latency_delta_pct": 27.9,
+      "baseline_bytes_mb": 4.5,
+      "optimized_bytes_mb": 0.1,
+      "bytes_delta_pct": 97.7
+    },
+    {
+      "query_id": "Q03",
+      "query_label": "High-value transactions in travel category",
+      "baseline_latency_ms": 1252,
+      "optimized_latency_ms": 845,
+      "latency_delta_pct": 32.5,
+      "baseline_bytes_mb": 77.5,
+      "optimized_bytes_mb": 7.3,
+      "bytes_delta_pct": 90.6
+    },
+    {
+      "query_id": "Q05",
+      "query_label": "Average transaction size by card type and channel (dining)",
+      "baseline_latency_ms": 1123,
+      "optimized_latency_ms": 694,
+      "latency_delta_pct": 38.2,
+      "baseline_bytes_mb": 20.5,
+      "optimized_bytes_mb": 2.4,
+      "bytes_delta_pct": 88.5
+    },
+    {
+      "query_id": "Q06",
+      "query_label": "Fraud detection \u00e2\u20ac\u201d suspicious high-amount online transactions",
+      "baseline_latency_ms": 1369,
+      "optimized_latency_ms": 1001,
+      "latency_delta_pct": 26.9,
+      "baseline_bytes_mb": 57.5,
+      "optimized_bytes_mb": 2.4,
+      "bytes_delta_pct": 95.9
+    },
+    {
+      "query_id": "Q07",
+      "query_label": "Region comparison for utilities spend",
+      "baseline_latency_ms": 1178,
+      "optimized_latency_ms": 887,
+      "latency_delta_pct": 24.7,
+      "baseline_bytes_mb": 19.9,
+      "optimized_bytes_mb": 1.3,
+      "bytes_delta_pct": 93.5
+    },
+    {
+      "query_id": "Q08",
+      "query_label": "Customer segmentation by account age (healthcare)",
+      "baseline_latency_ms": 1016,
+      "optimized_latency_ms": 707,
+      "latency_delta_pct": 30.4,
+      "baseline_bytes_mb": 26.5,
+      "optimized_bytes_mb": 1.5,
+      "bytes_delta_pct": 94.4
+    },
+    {
+      "query_id": "Q09",
+      "query_label": "Currency distribution for entertainment",
+      "baseline_latency_ms": 1080,
+      "optimized_latency_ms": 567,
+      "latency_delta_pct": 47.5,
+      "baseline_bytes_mb": 19.3,
+      "optimized_bytes_mb": 1.0,
+      "bytes_delta_pct": 94.8
+    },
+    {
+      "query_id": "Q10",
+      "query_label": "Top merchants by transaction volume (groceries)",
+      "baseline_latency_ms": 1339,
+      "optimized_latency_ms": 638,
+      "latency_delta_pct": 52.3,
+      "baseline_bytes_mb": 29.8,
+      "optimized_bytes_mb": 1.4,
+      "bytes_delta_pct": 95.2
+    },
+    {
+      "query_id": "Q11",
+      "query_label": "Multi-category fraud pattern",
+      "baseline_latency_ms": 1405,
+      "optimized_latency_ms": 784,
+      "latency_delta_pct": 44.2,
+      "baseline_bytes_mb": 4.5,
+      "optimized_bytes_mb": 0.2,
+      "bytes_delta_pct": 95.9
+    },
+    {
+      "query_id": "Q12",
+      "query_label": "ATM transaction analysis",
+      "baseline_latency_ms": 1186,
+      "optimized_latency_ms": 822,
+      "latency_delta_pct": 30.7,
+      "baseline_bytes_mb": 21.1,
+      "optimized_bytes_mb": 4.6,
+      "bytes_delta_pct": 78.1
+    },
+    {
+      "query_id": "Q13",
+      "query_label": "High-value customer analysis (travel + healthcare)",
+      "baseline_latency_ms": 1731,
+      "optimized_latency_ms": 1107,
+      "latency_delta_pct": 36.1,
+      "baseline_bytes_mb": 55.7,
+      "optimized_bytes_mb": 9.6,
+      "bytes_delta_pct": 82.8
+    },
+    {
+      "query_id": "Q15",
+      "query_label": "Prepaid card usage patterns",
+      "baseline_latency_ms": 1271,
+      "optimized_latency_ms": 819,
+      "latency_delta_pct": 35.6,
+      "baseline_bytes_mb": 19.3,
+      "optimized_bytes_mb": 5.1,
+      "bytes_delta_pct": 73.3
+    },
+    {
+      "query_id": "Q16",
+      "query_label": "Cross-region spend comparison (entertainment)",
+      "baseline_latency_ms": 1354,
+      "optimized_latency_ms": 727,
+      "latency_delta_pct": 46.3,
+      "baseline_bytes_mb": 57.5,
+      "optimized_bytes_mb": 3.6,
+      "bytes_delta_pct": 93.8
+    },
+    {
+      "query_id": "Q17",
+      "query_label": "Fraud risk score by channel (financial category)",
+      "baseline_latency_ms": 953,
+      "optimized_latency_ms": 716,
+      "latency_delta_pct": 24.8,
+      "baseline_bytes_mb": 3.9,
+      "optimized_bytes_mb": 0.0,
+      "bytes_delta_pct": 98.9
+    },
+    {
+      "query_id": "Q18",
+      "query_label": "EUR transactions analysis",
+      "baseline_latency_ms": 1636,
+      "optimized_latency_ms": 717,
+      "latency_delta_pct": 56.2,
+      "baseline_bytes_mb": 19.3,
+      "optimized_bytes_mb": 6.3,
+      "bytes_delta_pct": 67.3
+    },
+    {
+      "query_id": "Q19",
+      "query_label": "New customer transaction patterns",
+      "baseline_latency_ms": 1775,
+      "optimized_latency_ms": 879,
+      "latency_delta_pct": 50.5,
+      "baseline_bytes_mb": 29.0,
+      "optimized_bytes_mb": 4.9,
+      "bytes_delta_pct": 83.2
+    },
+    {
+      "query_id": "Q20",
+      "query_label": "Large transaction fraud check (multi-category)",
+      "baseline_latency_ms": 1451,
+      "optimized_latency_ms": 969,
+      "latency_delta_pct": 33.2,
+      "baseline_bytes_mb": 25.5,
+      "optimized_bytes_mb": 3.5,
+      "bytes_delta_pct": 86.1
+    },
+    {
+      "query_id": "Q22",
+      "query_label": "AP region high-value retail",
+      "baseline_latency_ms": 4651,
+      "optimized_latency_ms": 912,
+      "latency_delta_pct": 80.4,
+      "baseline_bytes_mb": 64.6,
+      "optimized_bytes_mb": 8.7,
+      "bytes_delta_pct": 86.5
+    },
+    {
+      "query_id": "Q24",
+      "query_label": "Debit card category spend distribution",
+      "baseline_latency_ms": 935,
+      "optimized_latency_ms": 874,
+      "latency_delta_pct": 6.5,
+      "baseline_bytes_mb": 19.3,
+      "optimized_bytes_mb": 12.3,
+      "bytes_delta_pct": 36.3
+    },
+    {
+      "query_id": "Q25",
+      "query_label": "Combined fraud and spend summary (all categories, for baseline comparison)",
+      "baseline_latency_ms": 1180,
+      "optimized_latency_ms": 1083,
+      "latency_delta_pct": 8.2,
+      "baseline_bytes_mb": 18.2,
+      "optimized_bytes_mb": 11.3,
+      "bytes_delta_pct": 38.3
+    }
+  ]
+}

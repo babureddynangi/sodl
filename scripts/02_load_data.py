@@ -5,6 +5,7 @@ Uploads Parquet files to S3 and registers Glue external tables.
 """
 import os, sys, boto3
 from botocore.exceptions import ClientError
+from concurrent.futures import ThreadPoolExecutor, as_completed
 sys.path.insert(0, ".")
 from config import (
     AWS_REGION, AWS_PROFILE, S3_BUCKET, S3_PREFIX_BASELINE, S3_PREFIX_OPTIMIZED,
@@ -12,23 +13,42 @@ from config import (
 )
 
 session = boto3.Session(profile_name=AWS_PROFILE, region_name=AWS_REGION)
-s3   = session.client("s3")
 glue = session.client("glue")
 
 
+def _s3_client():
+    """Per-thread S3 client (boto3 clients are not thread-safe)."""
+    return session.client("s3")
+
+s3 = _s3_client()
+
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
-def upload_directory(local_dir: str, s3_prefix: str) -> int:
-    """Upload all files under local_dir to s3://BUCKET/s3_prefix, preserving structure."""
-    count = 0
+def _upload_one(args):
+    local_path, s3_key = args
+    _s3_client().upload_file(local_path, S3_BUCKET, s3_key)
+    return s3_key
+
+def upload_directory(local_dir: str, s3_prefix: str, workers: int = 16) -> int:
+    """Upload all files in parallel using a thread pool."""
+    tasks = []
     for root, _, files in os.walk(local_dir):
         for fname in files:
             local_path = os.path.join(root, fname)
-            # Compute relative path from local_dir
             rel = os.path.relpath(local_path, local_dir)
             s3_key = s3_prefix + rel.replace(os.sep, "/")
-            s3.upload_file(local_path, S3_BUCKET, s3_key)
-            count += 1
-    return count
+            tasks.append((local_path, s3_key))
+
+    print(f"      {len(tasks)} files to upload with {workers} threads...")
+    done = 0
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        futures = {ex.submit(_upload_one, t): t for t in tasks}
+        for f in as_completed(futures):
+            f.result()  # raise on error
+            done += 1
+            if done % 10 == 0 or done == len(tasks):
+                print(f"      {done}/{len(tasks)} uploaded", flush=True)
+    return done
 
 
 def get_parquet_columns(local_dir: str):
@@ -37,9 +57,9 @@ def get_parquet_columns(local_dir: str):
     for root, _, files in os.walk(local_dir):
         for f in files:
             if f.endswith(".parquet"):
-                tbl = pq.read_table(os.path.join(root, f)).schema
-                return [(field.name, _pa_to_glue_type(str(field.type)))
-                        for field in tbl]
+                pf = pq.ParquetFile(os.path.join(root, f))
+                return [(field.name, _pa_to_glue_type(str(field.physical_type if hasattr(field, 'physical_type') else field.type)))
+                        for field in pf.schema_arrow]
     return []
 
 
@@ -142,21 +162,21 @@ def add_glue_partitions(table_name: str, s3_prefix: str, partition_key: str):
 if __name__ == "__main__":
     print("=== SODL MVP — Day 2: Load Data ===")
 
+    baseline_local  = os.path.join(LOCAL_DATA_DIR, "baseline")
+    optimized_local = os.path.join(LOCAL_DATA_DIR, "optimized")
+
     # ── Upload baseline (date-partitioned) ─────────────────────────────────
     print("\n[1/4] Uploading baseline (date partitions)...")
-    baseline_local = os.path.join(LOCAL_DATA_DIR, "baseline")
     n = upload_directory(baseline_local, S3_PREFIX_BASELINE)
     print(f"      Uploaded {n} files → s3://{S3_BUCKET}/{S3_PREFIX_BASELINE}")
 
     # ── Upload optimized (category-partitioned) ────────────────────────────
     print("\n[2/4] Uploading optimized (merchant_category partitions)...")
-    optimized_local = os.path.join(LOCAL_DATA_DIR, "optimized")
     n = upload_directory(optimized_local, S3_PREFIX_OPTIMIZED)
     print(f"      Uploaded {n} files → s3://{S3_BUCKET}/{S3_PREFIX_OPTIMIZED}")
 
     # ── Baseline Glue table ────────────────────────────────────────────────
     print("\n[3/4] Registering Glue tables...")
-    # Get column schema from a sample file (exclude the date partition col)
     cols = get_parquet_columns(baseline_local)
     register_glue_table(
         table_name=GLUE_TABLE_BASELINE,

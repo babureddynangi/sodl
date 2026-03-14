@@ -291,7 +291,7 @@ def write_summary_md(summary: dict, advisor: dict, out_dir: str):
     ]
 
     path = os.path.join(out_dir, "summary.md")
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
     print(f"[OK] Summary saved: {path}")
     return path
@@ -370,7 +370,7 @@ toward a fully integrated, production-validated contribution.
 
     path = os.path.join(out_dir, "paper_subsection.md")
     os.makedirs(out_dir, exist_ok=True)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(text)
     print(f"[OK] Paper subsection saved: {path}")
     return path

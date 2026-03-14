@@ -1,0 +1,71 @@
+{
+  "total_queries_analyzed": 25,
+  "current_partition_key": "transaction_date",
+  "current_ig_score": 0.0,
+  "candidate_scores": {
+    "merchant_category": 1.2162,
+    "is_fraud": 0.4373,
+    "card_type": 0.2447,
+    "channel": 0.1058,
+    "currency": 0.1058
+  },
+  "recommended_key": "merchant_category",
+  "recommended_ig_score": 1.2162,
+  "delta_ig": 1.2162,
+  "ig_threshold": 0.1,
+  "recommendation_made": true,
+  "column_query_frequency": {
+    "merchant_category": 23,
+    "is_fraud": 3,
+    "channel": 1,
+    "card_type": 2,
+    "currency": 1,
+    "region": 1
+  },
+  "queries_hitting_col": {
+    "merchant_category": [
+      "Q01",
+      "Q02",
+      "Q03",
+      "Q04",
+      "Q05",
+      "Q06",
+      "Q07",
+      "Q08",
+      "Q09",
+      "Q10",
+      "Q11",
+      "Q12",
+      "Q13",
+      "Q14",
+      "Q15",
+      "Q16",
+      "Q17",
+      "Q18",
+      "Q19",
+      "Q20",
+      "Q21",
+      "Q22",
+      "Q23"
+    ],
+    "is_fraud": [
+      "Q06",
+      "Q20",
+      "Q21"
+    ],
+    "channel": [
+      "Q12"
+    ],
+    "card_type": [
+      "Q15",
+      "Q24"
+    ],
+    "currency": [
+      "Q18"
+    ],
+    "region": [
+      "Q22"
+    ]
+  },
+  "rationale": "Column 'merchant_category' appears in 23 of 25 queries as a filter predicate (IG score: 1.2162 vs current key 'transaction_date': 0.0000). Cardinality 10 creates 10 partitions, allowing Athena to prune partitions for ~23 queries."
+}
