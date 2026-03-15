@@ -42,6 +42,13 @@ GATE_MIN_CONFIDENCE      = 0.80   # minimum model confidence to accept recommend
 GATE_MIN_IMPROVEMENT_PCT = 10.0   # minimum predicted improvement % to accept
 GATE_MIN_SAMPLES         = 5      # minimum benchmark samples required
 
+# ── SageMaker ─────────────────────────────────────────────────────────────────
+# IAM role ARN that SageMaker will assume — must have S3 + SageMaker permissions
+SAGEMAKER_ROLE      = os.environ.get("SAGEMAKER_ROLE", "arn:aws:iam::857639285149:role/SageMakerExecutionRole")
+SAGEMAKER_INSTANCE  = "ml.m5.large"          # change to "local" if Docker available; needs quota approval for cloud
+SAGEMAKER_FRAMEWORK = "1.2-1"                # scikit-learn framework version on SageMaker
+S3_PREFIX_SAGEMAKER = "sagemaker/models/"    # where SageMaker writes model.tar.gz
+
 # ── Local paths ───────────────────────────────────────────────────────────────
 LOCAL_DATA_DIR      = "data/"
 LOCAL_RESULTS_DIR   = "results/"
