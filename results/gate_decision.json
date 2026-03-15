@@ -1,0 +1,12 @@
+{
+  "decision": "accept",
+  "confidence": 1.0,
+  "predicted_improvement_pct": 35.79,
+  "gate_reason": "passes_all_thresholds",
+  "recommended_layout": "merchant_category",
+  "current_layout": "transaction_date",
+  "timestamp": "2026-03-15T13:48:50.121296+00:00",
+  "exec_table": "transactions_exec_20260315_134853",
+  "status": "completed",
+  "post_exec_csv": "results/post_exec_benchmark.csv"
+}

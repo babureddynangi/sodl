@@ -1,0 +1,31 @@
+{
+  "best_model": "logistic_regression",
+  "models": [
+    {
+      "model": "logistic_regression",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": null
+    },
+    {
+      "model": "random_forest",
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "roc_auc": null
+    }
+  ],
+  "feature_cols": [
+    "baseline_mean_runtime_ms",
+    "baseline_mean_bytes",
+    "optimized_mean_runtime_ms",
+    "optimized_mean_bytes",
+    "runtime_improvement_pct",
+    "bytes_improvement_pct",
+    "partition_scheme_baseline",
+    "partition_scheme_optimized"
+  ]
+}

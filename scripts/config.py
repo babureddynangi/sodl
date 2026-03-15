@@ -37,6 +37,11 @@ QUERY_TIMEOUT_SEC   = 300         # abort query if > 5 min
 IG_DELTA_THRESHOLD  = 0.10        # minimum IG improvement to trigger recommendation
 TOP_K_CANDIDATES    = 5           # score this many candidate keys
 
+# ── Confidence Gate ───────────────────────────────────────────────────────────
+GATE_MIN_CONFIDENCE      = 0.80   # minimum model confidence to accept recommendation
+GATE_MIN_IMPROVEMENT_PCT = 10.0   # minimum predicted improvement % to accept
+GATE_MIN_SAMPLES         = 5      # minimum benchmark samples required
+
 # ── Local paths ───────────────────────────────────────────────────────────────
 LOCAL_DATA_DIR      = "data/"
 LOCAL_RESULTS_DIR   = "results/"

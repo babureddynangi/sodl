@@ -1,0 +1,14 @@
+{
+  "current_layout": "transaction_date",
+  "recommended_layout": "merchant_category",
+  "predicted_improvement_pct": 35.79,
+  "confidence": 1.0,
+  "reason_codes": [
+    "'merchant_category' is a filter predicate in 23/25 queries",
+    "high information gain score (1.2162)",
+    "historical mean runtime improvement 35.8%",
+    "historical mean bytes reduction 83.3%"
+  ],
+  "model_used": "logistic_regression",
+  "n_queries_analyzed": 21
+}
