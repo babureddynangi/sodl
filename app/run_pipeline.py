@@ -73,6 +73,7 @@ def main():
             "post_exec_path": os.path.join(r, "post_exec_benchmark.csv"),
             "decision_path":  os.path.join(r, "gate_decision.json"),
             "out_path":       os.path.join(r, "experiment_report.md"),
+            "audit_log_path": os.path.join(r, "gate_audit_log.jsonl"),
         },
     ]
 

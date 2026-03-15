@@ -5,10 +5,13 @@ Applies an accepted gate decision by registering a new Glue table (reusing
 existing optimized S3 data — zero new storage cost), then re-runs the
 benchmark and saves post-execution telemetry.
 
+Includes rollback: if post-exec metrics regress vs baseline, the exec table
+is dropped and the rollback event is appended to the audit log.
+
 Usage:
   python app/executor/execute.py
 """
-import sys, os, json, subprocess, shutil
+import sys, os, json, subprocess, shutil, csv, statistics
 from datetime import datetime, timezone
 import boto3
 from botocore.exceptions import ClientError
@@ -109,7 +112,6 @@ def copy_partitions(src_table: str, dst_table: str):
 
 def run_benchmark_against(table_name: str, out_csv: str) -> bool:
     """Run benchmark script against a specific table, save results to out_csv."""
-    # Temporarily patch: run optimized benchmark and rename output
     result = subprocess.run(
         [sys.executable, "scripts/03_run_benchmark.py", "optimized"],
         cwd=os.getcwd(),
@@ -121,6 +123,50 @@ def run_benchmark_against(table_name: str, out_csv: str) -> bool:
         print(f"[OK] Post-execution benchmark saved: {out_csv}")
         return True
     return False
+
+
+def _median_latency(csv_path: str) -> float:
+    """Return median engine_ms for SUCCEEDED rows in a benchmark CSV."""
+    with open(csv_path) as f:
+        rows = [r for r in csv.DictReader(f) if r.get("status") == "SUCCEEDED"]
+    if not rows:
+        return float("inf")
+    vals = sorted(float(r["engine_ms"]) for r in rows if r.get("engine_ms"))
+    return vals[len(vals) // 2]
+
+
+def rollback(exec_table: str, audit_log: str, reason: str, decision: dict) -> dict:
+    """
+    Drop the exec Glue table and log the rollback event to the audit log.
+    Returns updated decision dict with status='rolled_back'.
+    """
+    print(f"[ROLLBACK] Triggered — {reason}")
+    try:
+        glue.delete_table(DatabaseName=GLUE_DATABASE, Name=exec_table)
+        print(f"[ROLLBACK] Dropped Glue table: {GLUE_DATABASE}.{exec_table}")
+    except ClientError as e:
+        print(f"[ROLLBACK][WARN] Could not drop table {exec_table}: {e}")
+
+    rollback_event = {
+        "event":       "rollback",
+        "exec_table":  exec_table,
+        "reason":      reason,
+        "timestamp":   datetime.now(timezone.utc).isoformat(),
+        "original_decision": {
+            "confidence":              decision.get("confidence"),
+            "predicted_improvement_pct": decision.get("predicted_improvement_pct"),
+            "recommended_layout":      decision.get("recommended_layout"),
+            "current_layout":          decision.get("current_layout"),
+        },
+    }
+    with open(audit_log, "a") as f:
+        f.write(json.dumps(rollback_event) + "\n")
+    print(f"[ROLLBACK] Event appended to audit log: {audit_log}")
+
+    decision["status"]          = "rolled_back"
+    decision["rollback_reason"] = reason
+    decision["rollback_ts"]     = rollback_event["timestamp"]
+    return decision
 
 
 def execute(decision_path: str, post_exec_out: str) -> dict:
@@ -172,6 +218,30 @@ def execute(decision_path: str, post_exec_out: str) -> dict:
         if os.path.exists(fallback):
             shutil.copy(fallback, post_exec_out)
             print(f"[OK] Fallback: copied {fallback} → {post_exec_out}")
+
+    # 4. Post-execution validation — rollback if metrics regressed
+    audit_log = os.path.join(LOCAL_RESULTS_DIR, "gate_audit_log.jsonl")
+    baseline_csv = os.path.join(LOCAL_RESULTS_DIR, "baseline.csv")
+    if os.path.exists(post_exec_out) and os.path.exists(baseline_csv):
+        baseline_median = _median_latency(baseline_csv)
+        post_exec_median = _median_latency(post_exec_out)
+        improvement_pct = (baseline_median - post_exec_median) / baseline_median * 100
+        print(f"[VALIDATE] Baseline median: {baseline_median:.0f}ms  "
+              f"Post-exec median: {post_exec_median:.0f}ms  "
+              f"Improvement: {improvement_pct:.1f}%")
+        if improvement_pct < 0:
+            decision = rollback(
+                exec_table=exec_table,
+                audit_log=audit_log,
+                reason=f"post-exec latency regressed by {abs(improvement_pct):.1f}% "
+                       f"({post_exec_median:.0f}ms > baseline {baseline_median:.0f}ms)",
+                decision=decision,
+            )
+            with open(decision_path, "w") as f:
+                json.dump(decision, f, indent=2)
+            return decision
+        else:
+            print(f"[VALIDATE] ✅ Improvement confirmed — no rollback needed")
 
     decision["status"] = "completed"
     decision["post_exec_csv"] = post_exec_out

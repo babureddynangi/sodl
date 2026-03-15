@@ -1,6 +1,6 @@
 # SODL Closed-Loop Experiment Report
 
-**Generated**: 2026-03-15 15:32 UTC
+**Generated**: 2026-03-15 16:01 UTC
 **Gate decision**: ACCEPT  (confidence=1.0000, predicted gain=38.6%)
 
 ---
@@ -34,6 +34,23 @@
 | Confidence | 1.0000 (threshold: 0.8) |
 | Predicted improvement | 38.6% (threshold: 10.0%) |
 | Gate reason | passes_all_thresholds |
+
+---
+
+## Rollback / Audit Trace
+
+Audit log: `results/gate_audit_log.jsonl`  (5 events)
+
+| # | Timestamp | Event | Decision | Confidence | Predicted Gain | Reason |
+|---|-----------|-------|----------|------------|----------------|--------|
+| 1 | 2026-03-15 13:33:15 | gate | REJECT | 1.0 | 36.77 | recommender returned no recommendation: unknown |
+| 2 | 2026-03-15 13:33:59 | gate | ACCEPT | 1.0 | 36.77 | passes_all_thresholds |
+| 3 | 2026-03-15 13:48:50 | gate | ACCEPT | 1.0 | 35.79 | passes_all_thresholds |
+| 4 | 2026-03-15 15:23:18 | gate | ACCEPT | 1.0 | 38.62 | passes_all_thresholds |
+| 5 | 2026-03-15 15:25:08 | gate | ACCEPT | 1.0 | 38.62 | passes_all_thresholds |
+
+**Exec table**: `transactions_exec_20260315_152833`  **Status**: `completed`
+**Rollback**: not triggered — post-exec metrics confirmed improvement
 
 ---
 

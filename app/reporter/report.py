@@ -85,11 +85,28 @@ def run_athena_count(table: str, timeout_sec: int = 60) -> int:
         return -1
 
 
+def load_audit_log(path: str) -> list:
+    """Load all events from the JSONL audit log."""
+    if not os.path.exists(path):
+        return []
+    events = []
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                try:
+                    events.append(json.loads(line))
+                except json.JSONDecodeError:
+                    pass
+    return events
+
+
 def generate_report(
     baseline_path: str,
     post_exec_path: str,
     decision_path: str,
     out_path: str,
+    audit_log_path: str = None,
 ) -> str:
     b_rows = load_csv(baseline_path)
     o_rows = load_csv(post_exec_path)
@@ -134,6 +151,10 @@ def generate_report(
         else f"⚠️  baseline={baseline_count}  optimized={optimized_count} successful queries"
     )
 
+    # Load audit log
+    audit_log_path = audit_log_path or os.path.join(LOCAL_RESULTS_DIR, "gate_audit_log.jsonl")
+    audit_events = load_audit_log(audit_log_path)
+
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     lines = [
@@ -175,6 +196,33 @@ def generate_report(
         f"| Confidence | {decision['confidence']:.4f} (threshold: {GATE_MIN_CONFIDENCE}) |",
         f"| Predicted improvement | {decision['predicted_improvement_pct']:.1f}% (threshold: {GATE_MIN_IMPROVEMENT_PCT}%) |",
         f"| Gate reason | {decision['gate_reason']} |",
+        "",
+        "---",
+        "",
+        "## Rollback / Audit Trace",
+        "",
+        f"Audit log: `results/gate_audit_log.jsonl`  ({len(audit_events)} events)",
+        "",
+        "| # | Timestamp | Event | Decision | Confidence | Predicted Gain | Reason |",
+        "|---|-----------|-------|----------|------------|----------------|--------|",
+        *[
+            f"| {i+1} | {e.get('timestamp','')[:19].replace('T',' ')} "
+            f"| {e.get('event','gate')} "
+            f"| {e.get('decision', e.get('event','—')).upper()} "
+            f"| {e.get('confidence', e.get('original_decision',{}).get('confidence','—'))} "
+            f"| {e.get('predicted_improvement_pct', e.get('original_decision',{}).get('predicted_improvement_pct','—'))} "
+            f"| {e.get('gate_reason', e.get('reason','—'))} |"
+            for i, e in enumerate(audit_events)
+        ],
+        "",
+        f"**Exec table**: `{decision.get('exec_table', 'N/A')}`  "
+        f"**Status**: `{decision.get('status', 'N/A')}`",
+        *(
+            [f"**Rollback reason**: {decision['rollback_reason']}  "
+             f"**Rollback time**: {decision.get('rollback_ts','')}"]
+            if decision.get("status") == "rolled_back" else
+            ["**Rollback**: not triggered — post-exec metrics confirmed improvement"]
+        ),
         "",
         "---",
         "",
